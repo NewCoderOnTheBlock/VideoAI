@@ -1,0 +1,25 @@
+To help you create a visually stunning AI video that aligns with the 10-minute script, I have organized these prompts into specific visual "scenes." These are designed to be used in high-end AI video generators like Runway, Luma Dream Machine, or Kling.
+​I have mapped these prompts directly to the details in "Phoenician Ship in the Port of Bormla, Malta_260630_123840.pdf" to ensure historical and thematic accuracy.  
+​Phase 1: Visual Scene Prompts
+​You can copy and paste these into your video generation tool.
+​Section 1: The Mediterranean Trade Network
+​Scene 1 (Intro): "Cinematic wide shot of a fleet of Phoenician merchant ships sailing across the calm, golden Mediterranean sea at dawn, historical accuracy, hyper-realistic, 4k."  
+​Scene 2 (Trade): "Close-up of Phoenician merchants on a bustling stone quay, loading volcanic stone millstones and decorated amphorae onto a ship, authentic period clothing, cinematic lighting, photorealistic."  
+​Section 2: Malta as the Strategic Hub
+​Scene 3 (Harbor Entrance): "Drone shot of the Grand Harbour in Malta, ancient era, focus on natural limestone inlets and high bastions, turquoise water, peaceful and majestic, 4k, cinematic."  
+​Scene 4 (Cultural Exchange): "Interaction between Phoenician mariners and local Maltese populations at a marketplace, exchange of goods and technology, vibrant, historically accurate setting, warm sunlight."  
+​Section 3: The Engineering Marvel (Gaulos Ship)
+​Scene 5 (The Ship): "Detailed 3D rotating model of a Phoenician 'Gaulos' ship, highlighting the symmetrical rounded hull, high curved bow and stern, visible wooden cedar texture, cinematic studio lighting."  
+​Scene 6 (Construction): "Cinematic close-up of ancient shipwrights joining wooden planks with mortise and tenon joints, using hardwood pegs and natural resin (bitumen), highly detailed, authentic tools, historical drama style."  
+​Section 4: The Safe Haven of Bormla
+​Scene 7 (Maintenance): "Ancient dry-dock scene within a limestone inlet in Bormla, ship under repair, caulking techniques being applied, sunlight streaming through, atmospheric, dust particles in the air, 4k."  
+​Scene 8 (Navigation): "Phoenician sailor on the deck of a ship at night, looking at the North Star and constellations, heavy steering oars visible, clear starlit sky, cinematic and mysterious."  
+​Section 5: Archaeological Legacy
+​Scene 9 (Underwater Excavation): "Underwater cinematic shot of an ancient shipwreck on the sandy seabed, ceramic amphorae half-buried in the sand, clear blue Mediterranean water, gentle light rays, photorealistic."  
+​Scene 10 (Modern Science): "Modern robotic underwater camera (ROV) with bright LED lights scanning ancient pottery and ship remains, glowing blue laser lines mapping the site, high-tech, cinematic contrast."  
+​Section 6: Conclusion (Bridging to Today)
+​Scene 11 (Legacy): "Time-lapse transition from an ancient painting of a Bormla harbor to a modern-day aerial view of the same location in the Three Cities of Malta, smooth motion, high definition."  
+​Tips for AI Video Success:
+​Consistency is Key: If you use a tool like Runway or Midjourney, try to use a "seed" number or a consistent style description (e.g., "Cinematic, historical documentary style, 4k") across all prompts to ensure the footage looks like it comes from the same film.
+​Pacing: Your script is 10 minutes long. When generating video, remember that 5-10 second clips are standard for AI generators. You will likely need to generate about 60–80 clips total to fill a 10-minute duration.
+​Background Music: Since you are building a professional investor presentation, search for "Cinematic Ancient Mediterranean" or "Documentary Historical Ambient" tracks to play underneath your voiceover. This will tie the visuals together seamlessly
