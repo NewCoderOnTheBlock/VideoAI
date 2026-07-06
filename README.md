@@ -1,8 +1,8 @@
 # VideoAI
 
-Used for: the repository-level overview of the Phoenician pilot workflow, its scripts, and its cloud validation path.
+Used for: the repository-level overview of the Phoenician documentary workflow, its scripts, and its cloud validation path.
 
-AI-assisted pilot video project for a short documentary about Phoenician trade, ships, and Bormla's harbor role.
+AI-assisted video project for a short documentary about Phoenician trade, ships, and Bormla's harbor role.
 
 ## What this repository is for
 
@@ -15,16 +15,21 @@ This repository stores the working scripts, planning files, and still-image asse
 3. Build upload clips for Pika or similar tools with `build_pika_upload_clips.py`.
 4. Extract still keyframes for Runway with `extract_runway_keyframes.py`.
 5. Assemble the returned final clips into a rough pilot with `build_rough_cut_from_finals.py`.
-6. Keep the older still-image pilot render path available through `build_pilot.py` and `build_pilot_alive.py`.
+6. Build the narrated PDF-aligned documentary cut with `build_pdf_documentary.py`.
+7. Keep the older still-image pilot render path available through `build_pilot.py` and `build_pilot_alive.py`.
 
 ## Key files
 
 - `WORK_PLAN.md`: active project strategy and current scope
 - `RUNWAY_UPLOAD_CHECKLIST.md`: exact upload file-to-prompt mapping
-- `ASSET_MANIFEST.md`: locked clip inventory for the current pilot
+- `ASSET_MANIFEST.md`: locked clip inventory for the current documentary cut
+- `SFX_PLAN.md`: free ambience file naming and shot-by-shot sound plan
+- `SFX_SOURCES.md`: the actual free source clips currently chosen for the ambience pack
 - `build_pika_upload_clips.py`: builds short upload clips from still images
 - `extract_runway_keyframes.py`: extracts upload keyframes from local clips
 - `build_rough_cut_from_finals.py`: concatenates the selected final clips into a rough pilot
+- `build_pdf_documentary.py`: renders the narrated documentary cut with optional ambience and subtitles
+- `build_ambience_pack.py`: builds shot-level ambience files from the downloaded free source clips
 - `build_pilot.py`: renders the original still-image preview
 - `build_pilot_alive.py`: renders the motion-pass still-image preview
 
@@ -39,8 +44,26 @@ The render scripts automatically look for a usable system font. If needed, set `
 
 ```bash
 python -m unittest discover -s tests
-python -m py_compile build_pilot.py build_pilot_alive.py build_pika_upload_clips.py build_rough_cut_from_finals.py extract_runway_keyframes.py render_support.py
+python -m py_compile build_pilot.py build_pilot_alive.py build_pika_upload_clips.py build_rough_cut_from_finals.py build_pdf_documentary.py extract_runway_keyframes.py render_support.py
 python build_pilot_alive.py
+python build_pdf_documentary.py
 ```
 
-The GitHub Actions workflow runs the same Python validation and renders the still-image motion pilot in the cloud. The externally generated MP4 workflow remains local because those video assets are intentionally not tracked in Git.
+## Optional ambience workflow
+
+Drop free sound files into `audio/ambience/` using the exact segment names from `SFX_PLAN.md`, for example:
+
+- `audio/ambience/intro_ocean.mp3`
+- `audio/ambience/shot03_harbor_approach.wav`
+- `audio/ambience/shot06_ship_construction.mp3`
+
+If a matching file exists, `build_pdf_documentary.py` automatically loops, trims, fades, and mixes it under the narration. If no file exists, the render stays narration-only for that segment.
+
+To rebuild the local curated ambience pack from the chosen Mixkit source files:
+
+```bash
+python build_ambience_pack.py
+python build_pdf_documentary.py
+```
+
+The GitHub Actions workflow runs the same Python validation and renders the still-image motion pilot in the cloud. The externally generated MP4 and optional local ambience workflow remain local because those media assets are intentionally not tracked in Git.

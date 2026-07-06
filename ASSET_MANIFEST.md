@@ -1,6 +1,6 @@
 # Asset Manifest
 
-Used for: the locked clip inventory for the current pilot, including which PDF topics are covered and what is still missing.
+Used for: the locked clip inventory for the current edit, including how the selected clips map to the PDF.
 
 ## Locked Working Folder
 
@@ -11,9 +11,8 @@ This folder contains the standardized filenames that should be used from now on 
 ## Locked Clips
 
 1. `intro_ocean.mp4`
-   - Use: calm visual introduction before the main pilot starts
-   - Source role: optional opener
-   - PDF coverage: mood only, not a specific section
+   - Use: calm visual introduction before the main documentary starts
+   - PDF coverage: mood transition into the historical context section
 
 2. `shot01_trade_network_fleet.mp4`
    - Use: fleet at sea / trade network opener
@@ -58,7 +57,6 @@ This folder contains the standardized filenames that should be used from now on 
    - PDF coverage:
      - Page 4: maritime expansion
      - Page 5: central Mediterranean location
-     - Page 16: trade-route evidence in archaeological interpretation
 
 9. `shot08_bormla_repair.mp4`
    - Use: repair, caulking, safe-haven maintenance
@@ -66,43 +64,48 @@ This folder contains the standardized filenames that should be used from now on 
      - Page 12: sheltered topography and geological depth
      - Page 14: ship maintenance and dry docks
 
-10. `insert_trade_goods.mp4`
-   - Use: optional cutaway of amphorae and cargo
-   - PDF coverage:
-     - Page 4: trade goods
-     - Page 13: maritime commerce
+10. `shot09_night_navigation.mp4`
+    - Use: celestial navigation by the North Star
+    - PDF coverage:
+      - Page 10: night navigation and steering
 
-## Pilot Coverage Judgment
+11. `shot10_underwater_shipwreck.mp4`
+    - Use: underwater archaeology and cargo evidence
+    - PDF coverage:
+      - Page 16: Xlendi shipwreck, intact cargo, anchor evolution
 
-For the **8-shot pilot**, the current clips are enough.
+12. `shot11_modern_conservation.mp4`
+    - Use: conservation, scanning, and preservation
+    - PDF coverage:
+      - Page 17: conservation techniques and digital documentation
 
-For the **full PDF content**, the current clips do **not** cover everything.
+13. `insert_trade_goods.mp4`
+    - Use: optional cutaway of amphorae and cargo
+    - PDF coverage:
+      - Page 4: trade goods
+      - Page 13: maritime commerce
 
-## Missing PDF Topics
+## Coverage Judgment
 
-These are the main topics from the PDF that do not yet have strong dedicated clips:
+For the **short pilot**, the current clips are enough.
 
-1. Celestial navigation at night
-   - PDF page 10
-   - Missing visual: sailor navigating by the North Star and constellations
+For the **PDF-aligned documentary cut**, the current clips are now sufficient if the edit uses:
 
-2. Underwater archaeology / shipwreck evidence
-   - PDF page 16
-   - Missing visual: shipwreck, amphorae on seabed, anchors, divers or submersibles
+- `shot11_modern_conservation.mp4` for page 17
+- a narrated closing card for page 18
+- the final fade-out or title card as the page 19 equivalent
 
-3. Modern preservation and digital documentation
-   - PDF page 17
-   - Missing visual: scanning, photogrammetry, conservation, museum/archive angle
+## Remaining Weak Spot
 
-4. Modern cultural legacy / present-day Bormla
+The only section that is still lighter than the rest visually is:
+
+1. Modern cultural legacy / present-day Bormla
    - PDF page 18
-   - Missing visual: modern Three Cities continuity or heritage impact
+   - Current handling: narration plus closing legacy card
+   - Optional future upgrade: one present-day Bormla or Three Cities heritage shot
 
 ## Recommendation
 
-- Proceed to the **rough pilot cut now** with the current selected clips.
-- Do **not** block the pilot on the missing PDF topics.
-- Generate the missing topics only if you want:
-  - a more complete investor cut
-  - a longer version beyond the pilot
-  - stronger alignment to the archaeological and modern-legacy sections of the PDF
+- Proceed to the **PDF-aligned documentary cut now** with the current selected clips.
+- Do **not** block the next build on another generation round.
+- Generate one more shot only if you want a stronger modern-day closing image.

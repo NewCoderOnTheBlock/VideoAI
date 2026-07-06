@@ -9,3 +9,8 @@ pika/finals/
 pika/upload_clips/
 
 runway/*.mp4
+
+audio/ambience/*
+!audio/ambience/.gitkeep
+audio/mixkit_sources/*
+!audio/mixkit_sources/.gitkeep

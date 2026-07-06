@@ -70,3 +70,24 @@ Recommended output folder after generation:
 - Use this text:
   `Phoenician ship under repair in the protected Bormla harbor, realistic caulking and maintenance activity, workers moving naturally, ropes shifting, sails fluttering lightly, water lapping against stone and hull, warm sunlight and harbor atmosphere, preserve the ship shape and limestone surroundings, no modern objects, no text.`
 - Save generated output as: `pika/finals/shot08_bormla_repair.mp4`
+
+### Shot 9
+
+- Upload image file: `runway/keyframes/shot09_night_navigation.png`
+- Use this text:
+  `Phoenician sailor on the deck of a merchant ship at night, steering by the North Star and visible constellations, calm dark Mediterranean sea, subtle lantern glow, gentle sail cloth movement, stable documentary framing, preserve the Phoenician gaulos ship details, no modern objects, no fantasy elements, no text.`
+- Save generated output as: `pika/finals/shot09_night_navigation.mp4`
+
+### Shot 10
+
+- Upload image file: `runway/keyframes/shot10_underwater_shipwreck.png`
+- Use this text:
+  `Ancient Phoenician shipwreck on the seabed near Malta, amphorae and stone anchors half-buried in pale sand, clear blue Mediterranean water, drifting particles, soft sun rays from above, realistic underwater archaeology mood, preserve cargo shapes and wooden hull remains, no divers, no modern equipment, no text.`
+- Save generated output as: `pika/finals/shot10_underwater_shipwreck.mp4`
+
+### Shot 11
+
+- Upload image file: `runway/keyframes/shot11_modern_conservation.png`
+- Use this text:
+  `Present-day Malta heritage conservation lab documenting Phoenician ship timber fragments and amphorae, careful expert hand movement, subtle scanning light, archival tables, museum-grade preservation atmosphere, realistic documentary style, preserve the archaeological objects and professional setting, no sci-fi look, no text.`
+- Save generated output as: `pika/finals/shot11_modern_conservation.mp4`
