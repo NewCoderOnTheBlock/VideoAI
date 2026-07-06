@@ -12,5 +12,7 @@ runway/*.mp4
 
 audio/ambience/*
 !audio/ambience/.gitkeep
+audio/music/*
+!audio/music/.gitkeep
 audio/mixkit_sources/*
 !audio/mixkit_sources/.gitkeep

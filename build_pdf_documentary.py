@@ -4,6 +4,7 @@ import asyncio
 import shutil
 import subprocess
 import sys
+import textwrap
 from pathlib import Path
 
 from render_support import escape_drawtext, find_ffmpeg, find_font, font_arg, run
@@ -17,16 +18,18 @@ AUDIO_DIR = OUTPUT_DIR / "audio_parts"
 MIXED_AUDIO_DIR = OUTPUT_DIR / "mixed_audio_parts"
 NARRATION_FILE = ROOT / "pdf_cut_narration.txt"
 AMBIENCE_DIR = ROOT / "audio" / "ambience"
+MUSIC_DIR = ROOT / "audio" / "music"
 
 WIDTH = 1280
 HEIGHT = 720
 FPS = 24
 SAMPLE_RATE = 24000
-VOICE = "en-GB-ThomasNeural"
-VOICE_RATE = "-6%"
-VOICE_PITCH = "-8Hz"
+VOICE = "en-US-RogerNeural"
+VOICE_RATE = "-10%"
+VOICE_PITCH = "-12Hz"
 AMBIENCE_EXTENSIONS = (".wav", ".mp3", ".m4a", ".flac", ".ogg")
 DEFAULT_AMBIENCE_VOLUME = 0.10
+MUSIC_VOLUME = 0.045
 
 
 SEGMENTS: list[dict[str, object]] = [
@@ -47,7 +50,8 @@ SEGMENTS: list[dict[str, object]] = [
         "source": None,
         "duration": 4.0,
         "card_text": "The Phoenician Legacy Lives On",
-        "card_subtitle": "Bormla still stands at the heart of Malta maritime memory.",
+        "card_subtitle": "Bormla still stands at the heart of Maltese maritime memory.",
+        "background_from": "shot11_modern_conservation.mp4",
         "ambience_volume": 0.0,
     },
 ]
@@ -104,6 +108,21 @@ def normalize_clip(ffmpeg: str, source: Path, output: Path) -> None:
     run(cmd)
 
 
+def extract_end_card_background(ffmpeg: str, source_clip: Path, output_image: Path) -> None:
+    cmd = [
+        ffmpeg,
+        "-y",
+        "-sseof",
+        "-0.10",
+        "-i",
+        str(source_clip),
+        "-frames:v",
+        "1",
+        str(output_image),
+    ]
+    run(cmd)
+
+
 def build_end_card(
     ffmpeg: str,
     font: Path,
@@ -111,33 +130,63 @@ def build_end_card(
     duration: float,
     title: str,
     subtitle: str,
+    background_image: Path | None,
 ) -> None:
     font_file = font_arg(font)
     title_text = escape_drawtext(title)
     subtitle_text = escape_drawtext(subtitle)
-    filtergraph = (
-        f"drawtext=fontfile='{font_file}':text='{title_text}':"
-        f"x=(w-text_w)/2:y=260:fontsize=50:fontcolor=white,"
-        f"drawtext=fontfile='{font_file}':text='{subtitle_text}':"
-        f"x=(w-text_w)/2:y=360:fontsize=28:fontcolor=white,"
-        f"fade=t=in:st=0:d=0.4,"
-        f"fade=t=out:st={max(duration - 0.5, 0.1):.2f}:d=0.4"
-    )
-    cmd = [
-        ffmpeg,
-        "-y",
-        "-f",
-        "lavfi",
-        "-i",
-        f"color=c=#0f1822:s={WIDTH}x{HEIGHT}:r={FPS}:d={duration}",
-        "-vf",
-        filtergraph,
-        "-c:v",
-        "libx264",
-        "-pix_fmt",
-        "yuv420p",
-        str(output),
+    base_filters = [
+        f"scale={WIDTH}:{HEIGHT}:force_original_aspect_ratio=increase",
+        f"crop={WIDTH}:{HEIGHT}",
+        "gblur=sigma=12",
+        "eq=brightness=-0.10:saturation=0.82",
+        f"drawbox=x=0:y={HEIGHT-210}:w={WIDTH}:h=210:color=black@0.40:t=fill",
+        (
+            f"drawtext=fontfile='{font_file}':text='{title_text}':"
+            f"x=(w-text_w)/2:y=250:fontsize=50:fontcolor=white"
+        ),
+        (
+            f"drawtext=fontfile='{font_file}':text='{subtitle_text}':"
+            f"x=(w-text_w)/2:y=340:fontsize=28:fontcolor=white"
+        ),
+        f"fade=t=in:st=0:d=0.4",
+        f"fade=t=out:st={max(duration - 0.5, 0.1):.2f}:d=0.4",
     ]
+
+    if background_image and background_image.exists():
+        cmd = [
+            ffmpeg,
+            "-y",
+            "-loop",
+            "1",
+            "-i",
+            str(background_image),
+            "-t",
+            f"{duration:.2f}",
+            "-vf",
+            ",".join(base_filters),
+            "-c:v",
+            "libx264",
+            "-pix_fmt",
+            "yuv420p",
+            str(output),
+        ]
+    else:
+        cmd = [
+            ffmpeg,
+            "-y",
+            "-f",
+            "lavfi",
+            "-i",
+            f"color=c=#0f1822:s={WIDTH}x{HEIGHT}:r={FPS}:d={duration}",
+            "-vf",
+            ",".join(base_filters[-5:]),
+            "-c:v",
+            "libx264",
+            "-pix_fmt",
+            "yuv420p",
+            str(output),
+        ]
     run(cmd)
 
 
@@ -246,6 +295,14 @@ def find_ambience_source(directory: Path, stem: str) -> Path | None:
     return None
 
 
+def find_music_bed(directory: Path) -> Path | None:
+    for stem in ("bed", "documentary_bed", "ambient_bed"):
+        found = find_ambience_source(directory, stem)
+        if found:
+            return found
+    return None
+
+
 def prepare_ambience_track(
     ffmpeg: str,
     source: Path,
@@ -304,6 +361,59 @@ def mix_narration_and_ambience(ffmpeg: str, narration: Path, ambience: Path, out
     run(cmd)
 
 
+def prepare_music_bed(ffmpeg: str, source: Path, output: Path, duration: float) -> None:
+    fade_out = min(2.0, max(duration / 10, 1.0))
+    fade_out_start = max(duration - fade_out, 0.0)
+    filters = [
+        f"volume={MUSIC_VOLUME:.3f}",
+        "highpass=f=80",
+        "lowpass=f=7000",
+        "afade=t=in:st=0:d=1.2",
+        f"afade=t=out:st={fade_out_start:.2f}:d={fade_out:.2f}",
+        f"atrim=0:{duration:.2f}",
+    ]
+    cmd = [
+        ffmpeg,
+        "-y",
+        "-stream_loop",
+        "-1",
+        "-i",
+        str(source),
+        "-t",
+        f"{duration:.2f}",
+        "-vn",
+        "-af",
+        ",".join(filters),
+        "-ar",
+        str(SAMPLE_RATE),
+        "-ac",
+        "1",
+        str(output),
+    ]
+    run(cmd)
+
+
+def mix_program_audio(ffmpeg: str, dry_mix: Path, music_bed: Path, output: Path) -> None:
+    cmd = [
+        ffmpeg,
+        "-y",
+        "-i",
+        str(dry_mix),
+        "-i",
+        str(music_bed),
+        "-filter_complex",
+        "[0:a][1:a]amix=inputs=2:duration=first:dropout_transition=0,alimiter=limit=0.90[aout]",
+        "-map",
+        "[aout]",
+        "-ar",
+        str(SAMPLE_RATE),
+        "-ac",
+        "1",
+        str(output),
+    ]
+    run(cmd)
+
+
 def write_concat_file(path: Path, files: list[Path]) -> None:
     path.write_text(
         "\n".join(f"file '{file.resolve().as_posix()}'" for file in files) + "\n",
@@ -319,6 +429,13 @@ def format_srt_timestamp(seconds: float) -> str:
     return f"{hours:02d}:{minutes:02d}:{secs:02d},{millis:03d}"
 
 
+def wrap_subtitle_text(text: str, width: int = 42) -> str:
+    lines = textwrap.wrap(text, width=width, break_long_words=False, break_on_hyphens=False)
+    if len(lines) <= 2:
+        return "\n".join(lines)
+    return "\n".join([lines[0], " ".join(lines[1:])])
+
+
 def write_srt(path: Path, rows: list[dict[str, object]]) -> None:
     lines: list[str] = []
     for index, row in enumerate(rows, start=1):
@@ -326,7 +443,7 @@ def write_srt(path: Path, rows: list[dict[str, object]]) -> None:
             [
                 str(index),
                 f"{format_srt_timestamp(float(row['start']))} --> {format_srt_timestamp(float(row['end']))}",
-                str(row["text"]),
+                wrap_subtitle_text(str(row["text"])),
                 "",
             ]
         )
@@ -347,6 +464,7 @@ def main() -> None:
     AUDIO_DIR.mkdir(parents=True, exist_ok=True)
     MIXED_AUDIO_DIR.mkdir(parents=True, exist_ok=True)
     AMBIENCE_DIR.mkdir(parents=True, exist_ok=True)
+    MUSIC_DIR.mkdir(parents=True, exist_ok=True)
 
     video_parts: list[Path] = []
     audio_parts: list[Path] = []
@@ -370,6 +488,12 @@ def main() -> None:
             duration = probe_duration(ffprobe, video_output)
         else:
             duration = float(segment["duration"])
+            background_image: Path | None = None
+            background_source = segment.get("background_from")
+            if background_source:
+                source_clip = SELECTED_DIR / str(background_source)
+                background_image = VIDEO_DIR / f"{index:02d}_{key}_background.png"
+                extract_end_card_background(ffmpeg, source_clip, background_image)
             build_end_card(
                 ffmpeg,
                 font,
@@ -377,6 +501,7 @@ def main() -> None:
                 duration,
                 str(segment["card_text"]),
                 str(segment["card_subtitle"]),
+                background_image,
             )
 
         raw_audio = synthesize_segment(ffmpeg, text, AUDIO_DIR / f"{index:02d}_{key}_raw")
@@ -415,9 +540,11 @@ def main() -> None:
     write_concat_file(audio_concat, audio_parts)
 
     silent_video = OUTPUT_DIR / "phoenician_pdf_documentary_silent.mp4"
+    voice_ambience_audio = OUTPUT_DIR / "phoenician_pdf_documentary_voice_ambience.wav"
     narration_audio = OUTPUT_DIR / "phoenician_pdf_documentary_narration.wav"
-    ambience_report_path = OUTPUT_DIR / "ambience_report.txt"
     subtitle_path = OUTPUT_DIR / "phoenician_pdf_documentary.srt"
+    ambience_report_path = OUTPUT_DIR / "ambience_report.txt"
+    music_report_path = OUTPUT_DIR / "music_report.txt"
     final_video = OUTPUT_DIR / "phoenician_pdf_documentary_subtitled.mp4"
 
     run(
@@ -452,9 +579,22 @@ def main() -> None:
             str(SAMPLE_RATE),
             "-ac",
             "1",
-            str(narration_audio),
+            str(voice_ambience_audio),
         ]
     )
+
+    music_bed_source = find_music_bed(MUSIC_DIR)
+    if music_bed_source:
+        prepared_music = AUDIO_DIR / "music_bed_prepared.wav"
+        prepare_music_bed(ffmpeg, music_bed_source, prepared_music, elapsed)
+        mix_program_audio(ffmpeg, voice_ambience_audio, prepared_music, narration_audio)
+        music_report_path.write_text(
+            f"music bed: {music_bed_source.name} at volume {MUSIC_VOLUME:.3f}\n",
+            encoding="utf-8",
+        )
+    else:
+        shutil.copyfile(voice_ambience_audio, narration_audio)
+        music_report_path.write_text("music bed: none\n", encoding="utf-8")
 
     ambience_report_path.write_text("\n".join(ambience_report) + "\n", encoding="utf-8")
     write_srt(subtitle_path, subtitle_rows)
@@ -487,6 +627,7 @@ def main() -> None:
     print(narration_audio)
     print(subtitle_path)
     print(ambience_report_path)
+    print(music_report_path)
 
 
 if __name__ == "__main__":

@@ -25,6 +25,7 @@ This repository stores the working scripts, planning files, and still-image asse
 - `ASSET_MANIFEST.md`: locked clip inventory for the current documentary cut
 - `SFX_PLAN.md`: free ambience file naming and shot-by-shot sound plan
 - `SFX_SOURCES.md`: the actual free source clips currently chosen for the ambience pack
+- `MUSIC_SOURCE.md`: the current free music bed source for the final mix
 - `build_pika_upload_clips.py`: builds short upload clips from still images
 - `extract_runway_keyframes.py`: extracts upload keyframes from local clips
 - `build_rough_cut_from_finals.py`: concatenates the selected final clips into a rough pilot
@@ -65,5 +66,11 @@ To rebuild the local curated ambience pack from the chosen Mixkit source files:
 python build_ambience_pack.py
 python build_pdf_documentary.py
 ```
+
+## Optional music workflow
+
+If `audio/music/bed.mp3` exists, `build_pdf_documentary.py` automatically loops, trims, fades, and mixes it quietly under the narration and ambience.
+
+The current local music source is documented in `MUSIC_SOURCE.md`.
 
 The GitHub Actions workflow runs the same Python validation and renders the still-image motion pilot in the cloud. The externally generated MP4 and optional local ambience workflow remain local because those media assets are intentionally not tracked in Git.
