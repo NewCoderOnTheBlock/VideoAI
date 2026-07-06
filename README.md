@@ -29,3 +29,7 @@ python build_pilot_alive.py
 ```
 
 The second command writes the preview video to `pilot/output/phoenician_pilot_preview_alive.mp4`.
+
+## Cloud build
+
+GitHub Actions validates the Python code, renders the motion pilot in the cloud, and uploads the generated MP4 as a workflow artifact for download.

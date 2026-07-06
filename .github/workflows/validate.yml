@@ -24,3 +24,18 @@ jobs:
 
       - name: Verify scripts compile
         run: python -m py_compile build_pilot.py build_pilot_alive.py render_support.py
+
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Render motion pilot
+        run: python build_pilot_alive.py
+
+      - name: Upload pilot artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: phoenician-pilot-preview-alive
+          path: pilot/output/phoenician_pilot_preview_alive.mp4
+          if-no-files-found: error
