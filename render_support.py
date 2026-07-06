@@ -56,4 +56,3 @@ def run(cmd: list[str]) -> None:
             "Command failed with exit code "
             f"{completed.returncode}:\n{' '.join(cmd)}\n{completed.stderr.strip()}"
         )
-

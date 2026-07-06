@@ -45,7 +45,6 @@ SCENES = [
         "duration": 9.0,
     },
 ]
-
 def build_intro(ffmpeg: str, font: Path) -> Path:
     output = CLIP_DIR / "intro.mp4"
     font_file = font_arg(font)

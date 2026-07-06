@@ -48,7 +48,6 @@ SCENES = [
         "subtitle": "The hull and shipwrights move through the next beat of the build",
     },
 ]
-
 def scene_duration() -> float:
     return (SEGMENT_DURATION * 3.0) - (CROSSFADE_DURATION * 2.0)
 

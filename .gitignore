@@ -1,7 +1,11 @@
 __pycache__/
 tmp/
-pilot/output/clips/
-pilot/output/clips_alive/
-pilot/output/concat.txt
-pilot/output/concat_alive.txt
-pilot/output/*.mp4
+*.pdf
+
+pilot/output/
+
+pika/*.mp4
+pika/finals/
+pika/upload_clips/
+
+runway/*.mp4

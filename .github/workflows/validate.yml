@@ -23,7 +23,7 @@ jobs:
         run: python -m unittest discover -s tests
 
       - name: Verify scripts compile
-        run: python -m py_compile build_pilot.py build_pilot_alive.py render_support.py
+        run: python -m py_compile build_pilot.py build_pilot_alive.py build_pika_upload_clips.py build_rough_cut_from_finals.py extract_runway_keyframes.py render_support.py
 
       - name: Install ffmpeg
         run: |
