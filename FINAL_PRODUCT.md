@@ -18,6 +18,7 @@ The finished short video is:
 - `deliverables/final/`
 - `pilot/output/pdf_cut/`
 - `pika/finals/selected/`
+- `runway/`
 - `audio/`
 - `docs/`
 

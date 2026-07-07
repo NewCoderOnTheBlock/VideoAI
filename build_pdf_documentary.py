@@ -12,14 +12,24 @@ from render_support import escape_drawtext, find_ffmpeg, find_font, font_arg, ru
 
 
 ROOT = Path(__file__).resolve().parent
-SELECTED_DIR = ROOT / "pika" / "finals" / "selected"
-OUTPUT_DIR = ROOT / "pilot" / "output" / "pdf_cut"
+SELECTED_DIR = Path(
+    os.environ.get("VIDEO_SELECTED_DIR", str(ROOT / "pika" / "finals" / "selected"))
+).resolve()
+OUTPUT_DIR = Path(
+    os.environ.get("VIDEO_OUTPUT_DIR", str(ROOT / "pilot" / "output" / "pdf_cut"))
+).resolve()
 VIDEO_DIR = OUTPUT_DIR / "video_parts"
 AUDIO_DIR = OUTPUT_DIR / "audio_parts"
 MIXED_AUDIO_DIR = OUTPUT_DIR / "mixed_audio_parts"
-NARRATION_FILE = ROOT / "pdf_cut_narration.txt"
-AMBIENCE_DIR = ROOT / "audio" / "ambience"
-MUSIC_DIR = ROOT / "audio" / "music"
+NARRATION_FILE = Path(
+    os.environ.get("VIDEO_NARRATION_FILE", str(ROOT / "pdf_cut_narration.txt"))
+).resolve()
+AMBIENCE_DIR = Path(
+    os.environ.get("VIDEO_AMBIENCE_DIR", str(ROOT / "audio" / "ambience"))
+).resolve()
+MUSIC_DIR = Path(
+    os.environ.get("VIDEO_MUSIC_DIR", str(ROOT / "audio" / "music"))
+).resolve()
 
 WIDTH = 1280
 HEIGHT = 720

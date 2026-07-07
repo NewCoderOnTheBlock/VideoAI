@@ -8,6 +8,11 @@ deliverables/
 
 pika/*.mp4
 pika/finals/
+!pika/finals/
+pika/finals/*
+!pika/finals/selected/
+pika/finals/selected/*
+!pika/finals/selected/.gitkeep
 pika/upload_clips/
 
 runway/*.mp4

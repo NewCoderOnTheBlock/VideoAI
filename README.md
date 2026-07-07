@@ -11,12 +11,17 @@ This repository stores the working scripts, final reference docs, and lightweigh
 ## Current workflow
 
 1. Use `scene_prompts.txt`, `presentation_script.txt`, and the source PDF locally for planning.
-2. Generate or review still assets in `pilot/assets/`, `pika/reference_frames/`, and `runway/keyframes/`.
+2. Generate or review still assets in `pilot/assets/`, `pika/reference_frames/`, and `runway/extended_cut_keyframes/`.
 3. Build upload clips for Pika or similar tools with `build_pika_upload_clips.py`.
 4. Extract still keyframes for Runway with `extract_runway_keyframes.py`.
 5. Assemble the returned final clips into a rough pilot with `build_rough_cut_from_finals.py`.
 6. Build the narrated PDF-aligned documentary cut with `build_pdf_documentary.py`.
 7. Keep the older still-image pilot render path available through `build_pilot.py` and `build_pilot_alive.py`.
+
+For the current longer no-compression revision, use:
+
+- `runway/EXTENDED_CUT_RUNWAY_BRIEF.md`
+- `pdf_cut_narration_extended_draft.txt`
 
 ## Key files
 
@@ -24,6 +29,8 @@ This repository stores the working scripts, final reference docs, and lightweigh
 - `docs/PROJECT_REFERENCE.md`: locked visual sequence and rebuild inputs
 - `docs/AUDIO_REFERENCE.md`: narration, ambience, and music setup
 - `docs/RUNWAY_UPLOAD_CHECKLIST.md`: archived prompt mapping for visual regeneration
+- `runway/EXTENDED_CUT_RUNWAY_BRIEF.md`: active Runway shot list for the longer cut
+- `pdf_cut_narration_extended_draft.txt`: active narration split for the longer cut
 - `MUSIC_SOURCE.md`: the current free music bed source for the final mix
 - `build_pika_upload_clips.py`: builds short upload clips from still images
 - `extract_runway_keyframes.py`: extracts upload keyframes from local clips
