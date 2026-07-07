@@ -1,12 +1,12 @@
 # VideoAI
 
-Used for: the repository-level overview of the Phoenician documentary workflow, its scripts, and its cloud validation path.
+Used for: the repository-level overview of the Phoenician documentary workflow, its scripts, and its final reference docs.
 
 AI-assisted video project for a short documentary about Phoenician trade, ships, and Bormla's harbor role.
 
 ## What this repository is for
 
-This repository stores the working scripts, planning files, and still-image assets for the pilot workflow. Generated MP4 clips, rough cuts, and temporary review files stay out of version control so the project can stay lightweight and cloud-friendly.
+This repository stores the working scripts, final reference docs, and lightweight production metadata for the documentary workflow. Generated MP4 clips, rough cuts, and temporary review files stay out of version control so the project can stay lightweight and cloud-friendly.
 
 ## Current workflow
 
@@ -20,11 +20,10 @@ This repository stores the working scripts, planning files, and still-image asse
 
 ## Key files
 
-- `WORK_PLAN.md`: active project strategy and current scope
-- `RUNWAY_UPLOAD_CHECKLIST.md`: exact upload file-to-prompt mapping
-- `ASSET_MANIFEST.md`: locked clip inventory for the current documentary cut
-- `SFX_PLAN.md`: free ambience file naming and shot-by-shot sound plan
-- `SFX_SOURCES.md`: the actual free source clips currently chosen for the ambience pack
+- `FINAL_PRODUCT.md`: where the finished deliverable lives and which folders still matter
+- `docs/PROJECT_REFERENCE.md`: locked visual sequence and rebuild inputs
+- `docs/AUDIO_REFERENCE.md`: narration, ambience, and music setup
+- `docs/RUNWAY_UPLOAD_CHECKLIST.md`: archived prompt mapping for visual regeneration
 - `MUSIC_SOURCE.md`: the current free music bed source for the final mix
 - `build_pika_upload_clips.py`: builds short upload clips from still images
 - `extract_runway_keyframes.py`: extracts upload keyframes from local clips
@@ -50,27 +49,18 @@ python build_pilot_alive.py
 python build_pdf_documentary.py
 ```
 
-## Optional ambience workflow
+## Audio workflow
 
-Drop free sound files into `audio/ambience/` using the exact segment names from `SFX_PLAN.md`, for example:
-
-- `audio/ambience/intro_ocean.mp3`
-- `audio/ambience/shot03_harbor_approach.wav`
-- `audio/ambience/shot06_ship_construction.mp3`
-
-If a matching file exists, `build_pdf_documentary.py` automatically loops, trims, fades, and mixes it under the narration. If no file exists, the render stays narration-only for that segment.
-
-To rebuild the local curated ambience pack from the chosen Mixkit source files:
+To rebuild the local curated ambience pack and final documentary cut:
 
 ```bash
 python build_ambience_pack.py
 python build_pdf_documentary.py
 ```
 
-## Optional music workflow
+See:
 
-If `audio/music/bed.mp3` exists, `build_pdf_documentary.py` automatically loops, trims, fades, and mixes it quietly under the narration and ambience.
-
-The current local music source is documented in `MUSIC_SOURCE.md`.
+- `docs/AUDIO_REFERENCE.md`
+- `MUSIC_SOURCE.md`
 
 The GitHub Actions workflow runs the same Python validation and renders the still-image motion pilot in the cloud. The externally generated MP4 and optional local ambience workflow remain local because those media assets are intentionally not tracked in Git.

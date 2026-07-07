@@ -3,6 +3,8 @@ tmp/
 *.pdf
 
 pilot/output/
+archive/
+deliverables/
 
 pika/*.mp4
 pika/finals/

@@ -1,93 +1,91 @@
 # Runway Upload Checklist
 
-Used for: the exact image-to-prompt upload workflow for Runway or another image-to-video tool.
+Used for: the archived image-to-video prompt mapping that was used to generate the final visual set.
 
-Use this file if you want the fastest possible workflow.
+## Archive Note
 
-Main image upload folder:
-- `runway/keyframes/`
+These assets are no longer part of the active workspace.
 
-Recommended output folder after generation:
-- `pika/finals/`
+- Archived keyframes now live in `archive/source_media/runway_keyframes/`
+- Older generated root clips now live in `archive/source_media/pika_generated_root/`
 
-## Shot-by-shot mapping
+Use this file only if you need to regenerate visuals later.
+
+## Shot-by-Shot Mapping
 
 ### Shot 1
 
-- Upload image file: `runway/keyframes/shot01_trade_network_fleet.png`
+- Upload image file: `archive/source_media/runway_keyframes/shot01_trade_network_fleet.png`
 - Use this text:
   `Wide Phoenician fleet sailing across a calm golden Mediterranean sea at sunrise, realistic water movement, gentle ship drift, soft sail motion, cinematic historical documentary feel.`
 - Save generated output as: `pika/finals/shot01_trade_network_fleet.mp4`
-- Note: You already have `pika/boat.mp4`, so regenerate only if you want a better version.
 
 ### Shot 2
 
-- Upload image file: `runway/keyframes/shot02_hero_gaulos_ship.png`
+- Upload image file: `archive/source_media/runway_keyframes/shot02_hero_gaulos_ship.png`
 - Use this text:
   `Close hero shot of a Phoenician merchant ship moving through sunlit water, strong bow profile, realistic wake, sail cloth movement, warm cinematic light, historical realism.`
 - Save generated output as: `pika/finals/shot02_hero_gaulos_ship.mp4`
-- Note: You already have `pika/biggerscaleboat.mp4`, so regenerate only if you want a better version.
 
 ### Shot 3
 
-- Upload image file: `runway/keyframes/shot03_harbor_approach.png`
+- Upload image file: `archive/source_media/runway_keyframes/shot03_harbor_approach.png`
 - Use this text:
   `Ancient Malta Grand Harbour in the Phoenician era, realistic moving water, gentle ship drift, small harbor traffic, sail cloth movement, subtle birds, atmospheric Mediterranean light, camera remains stable and documentary-like, preserve harbor geometry and limestone setting, no modern objects, no text.`
 - Save generated output as: `pika/finals/shot03_harbor_approach.mp4`
 
 ### Shot 4
 
-- Upload image file: `runway/keyframes/shot04_quay_loading.png`
+- Upload image file: `archive/source_media/runway_keyframes/shot04_quay_loading.png`
 - Use this text:
   `Phoenician merchants actively loading amphorae and volcanic millstones onto a ship, realistic human body motion, workers lifting, passing cargo, adjusting ropes, ship rocking slightly against the quay, natural water movement, historical documentary realism, preserve the stone quay and cargo arrangement, no modern objects, no text.`
 - Save generated output as: `pika/finals/shot04_quay_loading.mp4`
 
 ### Shot 5
 
-- Upload image file: `runway/keyframes/shot05_marketplace_exchange.png`
+- Upload image file: `archive/source_media/runway_keyframes/shot05_marketplace_exchange.png`
 - Use this text:
   `Phoenician traders and local Maltese people exchanging goods in a lively ancient harbor marketplace, natural gestures, fabric movement, subtle crowd activity, ships moving softly in the background, warm late-afternoon Mediterranean light, realistic historical documentary motion, preserve faces, clothing, pottery, and harbor setting, no modern objects, no text.`
 - Save generated output as: `pika/finals/shot05_marketplace_exchange.mp4`
 
 ### Shot 6
 
-- Upload image file: `runway/keyframes/shot06_ship_construction.png`
+- Upload image file: `archive/source_media/runway_keyframes/shot06_ship_construction.png`
 - Use this text:
   `Ancient shipwrights building a Phoenician merchant ship, realistic hand and arm motion, tool use, plank fitting, rope movement, dust and light atmosphere, subtle background worker motion, preserve wooden hull structure and authentic tools, cinematic historical documentary realism, no modern objects, no text.`
 - Save generated output as: `pika/finals/shot06_ship_construction.mp4`
 
 ### Shot 7
 
-- Upload image file: `runway/keyframes/shot07_trade_route_map.png`
+- Upload image file: `archive/source_media/runway_keyframes/shot07_trade_route_map.png`
 - Use this text:
   `Ancient Mediterranean parchment map with glowing animated trade routes spreading across the sea, warm candlelit atmosphere, stable overhead framing, cinematic documentary style.`
 - Save generated output as: `pika/finals/shot07_trade_route_map.mp4`
-- Note: You already have `pika/map.mp4`, so regenerate only if you want a better version.
 
 ### Shot 8
 
-- Upload image file: `runway/keyframes/shot08_bormla_repair.png`
+- Upload image file: `archive/source_media/runway_keyframes/shot08_bormla_repair.png`
 - Use this text:
   `Phoenician ship under repair in the protected Bormla harbor, realistic caulking and maintenance activity, workers moving naturally, ropes shifting, sails fluttering lightly, water lapping against stone and hull, warm sunlight and harbor atmosphere, preserve the ship shape and limestone surroundings, no modern objects, no text.`
 - Save generated output as: `pika/finals/shot08_bormla_repair.mp4`
 
 ### Shot 9
 
-- Upload image file: `runway/keyframes/shot09_night_navigation.png`
+- Upload image file: `archive/source_media/runway_keyframes/shot09_night_navigation.png`
 - Use this text:
   `Phoenician sailor on the deck of a merchant ship at night, steering by the North Star and visible constellations, calm dark Mediterranean sea, subtle lantern glow, gentle sail cloth movement, stable documentary framing, preserve the Phoenician gaulos ship details, no modern objects, no fantasy elements, no text.`
 - Save generated output as: `pika/finals/shot09_night_navigation.mp4`
 
 ### Shot 10
 
-- Upload image file: `runway/keyframes/shot10_underwater_shipwreck.png`
+- Upload image file: `archive/source_media/runway_keyframes/shot10_underwater_shipwreck.png`
 - Use this text:
   `Ancient Phoenician shipwreck on the seabed near Malta, amphorae and stone anchors half-buried in pale sand, clear blue Mediterranean water, drifting particles, soft sun rays from above, realistic underwater archaeology mood, preserve cargo shapes and wooden hull remains, no divers, no modern equipment, no text.`
 - Save generated output as: `pika/finals/shot10_underwater_shipwreck.mp4`
 
 ### Shot 11
 
-- Upload image file: `runway/keyframes/shot11_modern_conservation.png`
+- Upload image file: `archive/source_media/runway_keyframes/shot11_modern_conservation.png`
 - Use this text:
   `Present-day Malta heritage conservation lab documenting Phoenician ship timber fragments and amphorae, careful expert hand movement, subtle scanning light, archival tables, museum-grade preservation atmosphere, realistic documentary style, preserve the archaeological objects and professional setting, no sci-fi look, no text.`
 - Save generated output as: `pika/finals/shot11_modern_conservation.mp4`
