@@ -95,7 +95,7 @@ STANDARD_SEGMENTS: list[dict[str, object]] = [
         "card_text": "The Phoenician Legacy Lives On",
         "card_subtitle": "Bormla still stands at the heart of Maltese maritime memory.",
         "background_from": "shot11_modern_conservation.mp4",
-        "ambience_volume": 0.0,
+        "ambience_volume": 0.05,
     },
 ]
 
@@ -122,7 +122,7 @@ EXTENDED_SEGMENTS: list[dict[str, object]] = [
         "card_text": "The Phoenician Legacy Lives On",
         "card_subtitle": "Bormla still stands at the heart of Maltese maritime memory.",
         "background_from": "shot11_modern_conservation.mp4",
-        "ambience_volume": 0.0,
+        "ambience_volume": 0.05,
     },
 ]
 

@@ -101,6 +101,9 @@ RECIPES: dict[str, dict[str, object]] = {
     "shot10_underwater_shipwreck": {
         "inputs": [("underwater", 0.10)],
     },
+    "end_legacy": {
+        "inputs": [("close_sea_waves", 0.10)],
+    },
 }
 
 
@@ -131,6 +134,8 @@ def probe_duration(ffprobe: str, path: Path) -> float:
 
 
 def clip_duration(ffprobe: str, shot_key: str) -> float:
+    if shot_key == "end_legacy":
+        return 4.0
     if shot_key == "intro_ocean":
         clip = SELECTED_DIR / "intro_ocean.mp4"
     else:
