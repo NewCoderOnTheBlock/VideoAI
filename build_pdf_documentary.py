@@ -12,9 +12,30 @@ from render_support import escape_drawtext, find_ffmpeg, find_font, font_arg, ru
 
 
 ROOT = Path(__file__).resolve().parent
-SELECTED_DIR = Path(
-    os.environ.get("VIDEO_SELECTED_DIR", str(ROOT / "pika" / "finals" / "selected"))
-).resolve()
+WORKSPACE_ROOT = ROOT.parent
+
+
+def resolve_dir(env_name: str, local_path: Path, fallback_path: Path, required_names: tuple[str, ...]) -> Path:
+    env_value = os.environ.get(env_name)
+    if env_value:
+        return Path(env_value).resolve()
+
+    def has_required(path: Path) -> bool:
+        return path.exists() and all((path / name).exists() for name in required_names)
+
+    if has_required(local_path):
+        return local_path.resolve()
+    if has_required(fallback_path):
+        return fallback_path.resolve()
+    return local_path.resolve()
+
+
+SELECTED_DIR = resolve_dir(
+    "VIDEO_SELECTED_DIR",
+    ROOT / "pika" / "finals" / "selected",
+    WORKSPACE_ROOT / "pika" / "finals" / "selected",
+    ("intro_ocean.mp4", "shot01_trade_network_fleet.mp4"),
+)
 OUTPUT_DIR = Path(
     os.environ.get("VIDEO_OUTPUT_DIR", str(ROOT / "pilot" / "output" / "pdf_cut"))
 ).resolve()
@@ -29,12 +50,18 @@ DEFAULT_NARRATION = (
 NARRATION_FILE = Path(
     os.environ.get("VIDEO_NARRATION_FILE", str(DEFAULT_NARRATION))
 ).resolve()
-AMBIENCE_DIR = Path(
-    os.environ.get("VIDEO_AMBIENCE_DIR", str(ROOT / "audio" / "ambience"))
-).resolve()
-MUSIC_DIR = Path(
-    os.environ.get("VIDEO_MUSIC_DIR", str(ROOT / "audio" / "music"))
-).resolve()
+AMBIENCE_DIR = resolve_dir(
+    "VIDEO_AMBIENCE_DIR",
+    ROOT / "audio" / "ambience",
+    WORKSPACE_ROOT / "audio" / "ambience",
+    ("intro_ocean.wav",),
+)
+MUSIC_DIR = resolve_dir(
+    "VIDEO_MUSIC_DIR",
+    ROOT / "audio" / "music",
+    WORKSPACE_ROOT / "audio" / "music",
+    ("bed.mp3",),
+)
 
 WIDTH = 1280
 HEIGHT = 720

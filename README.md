@@ -65,6 +65,8 @@ python build_ambience_pack.py
 python build_pdf_documentary.py
 ```
 
+Both scripts now auto-detect the main local media folders outside the repo clone when the repo-local `pika/` or `audio/` folders do not contain the full working set.
+
 See:
 
 - `docs/AUDIO_REFERENCE.md`

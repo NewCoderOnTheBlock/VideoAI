@@ -9,15 +9,42 @@ from render_support import find_ffmpeg, run
 
 
 ROOT = Path(__file__).resolve().parent
-SOURCE_DIR = Path(
-    os.environ.get("VIDEO_MIXKIT_SOURCE_DIR", str(ROOT / "audio" / "mixkit_sources"))
-).resolve()
-OUTPUT_DIR = Path(
-    os.environ.get("VIDEO_AMBIENCE_DIR", str(ROOT / "audio" / "ambience"))
-).resolve()
-SELECTED_DIR = Path(
-    os.environ.get("VIDEO_SELECTED_DIR", str(ROOT / "pika" / "finals" / "selected"))
-).resolve()
+WORKSPACE_ROOT = ROOT.parent
+
+
+def resolve_dir(env_name: str, local_path: Path, fallback_path: Path, required_names: tuple[str, ...]) -> Path:
+    env_value = os.environ.get(env_name)
+    if env_value:
+        return Path(env_value).resolve()
+
+    def has_required(path: Path) -> bool:
+        return path.exists() and all((path / name).exists() for name in required_names)
+
+    if has_required(local_path):
+        return local_path.resolve()
+    if has_required(fallback_path):
+        return fallback_path.resolve()
+    return local_path.resolve()
+
+
+SOURCE_DIR = resolve_dir(
+    "VIDEO_MIXKIT_SOURCE_DIR",
+    ROOT / "audio" / "mixkit_sources",
+    WORKSPACE_ROOT / "audio" / "mixkit_sources",
+    ("1185_sea_waves_with_birds_loop.wav",),
+)
+OUTPUT_DIR = resolve_dir(
+    "VIDEO_AMBIENCE_DIR",
+    ROOT / "audio" / "ambience",
+    WORKSPACE_ROOT / "audio" / "ambience",
+    (".gitkeep",),
+)
+SELECTED_DIR = resolve_dir(
+    "VIDEO_SELECTED_DIR",
+    ROOT / "pika" / "finals" / "selected",
+    WORKSPACE_ROOT / "pika" / "finals" / "selected",
+    ("intro_ocean.mp4", "shot01_trade_network_fleet.mp4"),
+)
 
 
 SOURCES = {

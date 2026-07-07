@@ -8,6 +8,12 @@ The finished short video is:
 
 - `deliverables/final/phoenician_documentary_final.mp4`
 
+Current promoted version:
+
+- extended cut
+- about `107` seconds
+- Sonia narration, subtitles, music bed, and mixed ambience
+
 ## Supporting Deliverables
 
 - `deliverables/final/phoenician_documentary_subtitles.srt`
