@@ -6,16 +6,48 @@
 - Keep Sonia speaking at a natural pace.
 - Add visual breathing room instead of forcing the audio to fit short shots.
 
-## Priority
+## Recommended Strategy
 
-- Required new inserts:
-  - `insert_gaulos_hull_detail.mp4`
-  - `insert_bormla_harbor_overview.mp4`
-  - `insert_influence_routes_map.mp4`
-- Strongly recommended replacement:
-  - `insert_trade_goods.mp4`
+- Use a hybrid approach.
+- Keep the strongest existing clips that already work well.
+- Add only 3 genuinely new inserts where the current cut feels rushed or visually repetitive.
 
-The current `insert_trade_goods.mp4` works as a placeholder, but it feels too much like a still life and includes small glass beads that read as off-period. The archived quay-loading keyframe is much stronger and should be used if you are willing to regenerate that insert.
+## Why This Is Better
+
+- Reusing everything is the weakest option because `shot03`, `shot04`, and `shot08` already cover similar harbor space and would start to feel repetitive.
+- Replacing too much is wasteful because several current shots are already strong:
+  - `shot04_quay_loading.mp4`
+  - `shot05_marketplace_exchange.mp4`
+  - `shot06_ship_construction.mp4`
+  - `shot08_bormla_repair.mp4`
+  - `shot10_underwater_shipwreck.mp4`
+  - `shot11_modern_conservation.mp4`
+- The best return on credits is to keep those strong shots and generate new inserts only where the narration needs more time or a more specific visual.
+
+## What To Keep
+
+- Keep these existing clips:
+  - `intro_ocean.mp4`
+  - `shot01_trade_network_fleet.mp4`
+  - `shot02_hero_gaulos_ship.mp4`
+  - `shot03_harbor_approach.mp4`
+  - `shot04_quay_loading.mp4`
+  - `shot05_marketplace_exchange.mp4`
+  - `shot06_ship_construction.mp4`
+  - `shot07_trade_route_map.mp4`
+  - `shot08_bormla_repair.mp4`
+  - `shot09_night_navigation.mp4`
+  - `shot10_underwater_shipwreck.mp4`
+  - `shot11_modern_conservation.mp4`
+
+## What To Generate
+
+- Generate these 3 new inserts:
+  - `insert_trade_goods_detail.mp4`
+  - `insert_gaulos_broadside_hull.mp4`
+  - `insert_cultural_influence_map.mp4`
+
+The old `insert_trade_goods.mp4` is not recommended as the final insert. It feels too still and includes small beads that read as off-period.
 
 ## Where To Put The Returned Videos
 
@@ -26,76 +58,79 @@ The current `insert_trade_goods.mp4` works as a placeholder, but it feels too mu
 
 `build_pdf_documentary.py` now accepts `VIDEO_SELECTED_DIR`, so I can render from either location without reorganizing everything again.
 
+## Workflow
+
+- First create a new still keyframe for each new insert.
+- Then upload that still to Runway and use the matching motion prompt below.
+
 ## Runway Instructions
 
 - Generate each clip in `16:9`.
 - Aim for `5 seconds` per insert.
 - Keep motion slow and documentary-like.
-- Preserve the original composition of the keyframe.
+- Preserve the original composition of the keyframe you generate.
 - Avoid dramatic zooms, whip pans, fantasy effects, modern objects, and text overlays.
 
-## Shot 1: Trade Goods Insert
+## Shot 1: Trade Goods Detail Insert
 
-- Status:
-  - Replace the current insert if possible.
+- Create still keyframe first:
+  - Save as `runway/extended_cut_keyframes/insert_trade_goods_detail.png`
+- Keyframe prompt:
+  - `Tight cinematic historical documentary close-up on an ancient Maltese stone quay during the Phoenician era, dock workers handling volcanic stone millstones, amphorae, and diverse decorated pottery, hands passing cargo, coarse rope, weathered wood, warm Mediterranean sunlight, realistic textures, no modern objects, no text, 16:9.`
 - Upload image:
-  - `runway/extended_cut_keyframes/insert_trade_goods.png`
+  - `runway/extended_cut_keyframes/insert_trade_goods_detail.png`
 - Save returned video as:
-  - `insert_trade_goods.mp4`
+  - `insert_trade_goods_detail.mp4`
 - Insert after:
   - `shot01_trade_network_fleet.mp4`
-- Prompt:
-  - `Phoenician merchants and dock workers actively loading amphorae and volcanic stone millstones beside a merchant ship in ancient Malta, realistic human motion, workers lifting cargo, passing pottery hand to hand, ropes shifting, sail cloth moving lightly, water lapping against the quay, warm Mediterranean sunlight, cinematic historical documentary realism, preserve the stone harbor, pottery, and millstones, no modern objects, no text.`
+- Motion prompt:
+  - `Phoenician dock workers actively handling volcanic stone millstones, amphorae, and decorated pottery on an ancient Maltese quay, realistic hand and shoulder motion, cargo passed from person to person, rope shifting, cloth moving lightly in sea breeze, subtle harbor water movement in background, cinematic historical documentary realism, no modern objects, no text.`
 
-## Shot 2: Gaulos Hull Detail Insert
+## Shot 2: Gaulos Broadside Hull Insert
 
+- Create still keyframe first:
+  - Save as `runway/extended_cut_keyframes/insert_gaulos_broadside_hull.png`
+- Keyframe prompt:
+  - `Broadside documentary view of a Phoenician gaulos merchant ship at sea, clear rounded cargo belly, symmetrical hull shape, high curved bow and stern, square sail, calm Mediterranean water, golden late-afternoon light, historically grounded, realistic wood texture, no modern objects, no text, 16:9.`
 - Upload image:
-  - `runway/extended_cut_keyframes/insert_gaulos_hull_detail.png`
+  - `runway/extended_cut_keyframes/insert_gaulos_broadside_hull.png`
 - Save returned video as:
-  - `insert_gaulos_hull_detail.mp4`
+  - `insert_gaulos_broadside_hull.mp4`
 - Insert after:
   - `shot02_hero_gaulos_ship.mp4`
-- Prompt:
-  - `Close documentary view of a Phoenician gaulos ship moving steadily through calm Mediterranean water, realistic wake, gentle sail movement, subtle hull rocking, preserve the symmetrical rounded hull and high curved bow and stern, emphasize cargo-bearing stability and seaworthiness, warm golden light, no modern objects, no text.`
+- Motion prompt:
+  - `Phoenician gaulos ship moving steadily through calm Mediterranean water, realistic wake, gentle sail movement, subtle hull rocking, stable side-view composition, preserve the rounded cargo body and high curved bow and stern, emphasize balance, cargo capacity, and seaworthiness, warm documentary light, no modern objects, no text.`
 
-## Shot 3: Bormla Harbor Overview Insert
+## Shot 3: Cultural Influence Map Insert
 
+- Create still keyframe first:
+  - Save as `runway/extended_cut_keyframes/insert_cultural_influence_map.png`
+- Keyframe prompt:
+  - `Ancient Mediterranean trade map laid on a wooden table, Malta at the center with visible links toward Sardinia, North Africa, the Levant, and southern Europe, parchment, trade tokens, pottery fragments, warm candlelight, scholarly historical documentary mood, no modern labels, no text overlay, 16:9.`
 - Upload image:
-  - `runway/extended_cut_keyframes/insert_bormla_harbor_overview.png`
+  - `runway/extended_cut_keyframes/insert_cultural_influence_map.png`
 - Save returned video as:
-  - `insert_bormla_harbor_overview.mp4`
-- Insert after:
-  - `shot03_harbor_approach.mp4`
-- Prompt:
-  - `Wide elevated view of ancient Bormla and the Grand Harbour in the Phoenician era, realistic moving water, multiple ships drifting slowly, sails fluttering lightly, small harbor traffic, subtle birds above the limestone inlets, stable cinematic documentary framing, preserve the harbor geometry and stone shoreline, no modern objects, no text.`
-
-## Shot 4: Influence And Route Insert
-
-- Upload image:
-  - `runway/extended_cut_keyframes/insert_influence_routes_map.png`
-- Save returned video as:
-  - `insert_influence_routes_map.mp4`
+  - `insert_cultural_influence_map.mp4`
 - Insert after:
   - `shot07_trade_route_map.mp4`
-- Prompt:
-  - `Ancient Mediterranean parchment map with glowing animated trade routes linking the Levant, Malta, Sardinia, North Africa, and southern Europe, warm candlelit atmosphere, slow route pulses, subtle parchment movement, stable overhead documentary framing, emphasize the spread of trade and cultural influence, no modern labels, no text overlays.`
+- Motion prompt:
+  - `Ancient Mediterranean trade map in candlelight with subtle animated route pulses linking Malta, Sardinia, North Africa, the Levant, and southern Europe, slight parchment movement, small trade markers shifting gently, stable overhead documentary framing, emphasize cultural and commercial influence spreading across the sea, no modern labels, no text overlays.`
 
 ## Planned Order In The Extended Cut
 
 1. `intro_ocean.mp4`
 2. `shot01_trade_network_fleet.mp4`
-3. `insert_trade_goods.mp4`
+3. `insert_trade_goods_detail.mp4`
 4. `shot02_hero_gaulos_ship.mp4`
-5. `insert_gaulos_hull_detail.mp4`
+5. `insert_gaulos_broadside_hull.mp4`
 6. `shot03_harbor_approach.mp4`
-7. `insert_bormla_harbor_overview.mp4`
-8. `shot04_quay_loading.mp4`
-9. `shot05_marketplace_exchange.mp4`
-10. `shot06_ship_construction.mp4`
-11. `shot07_trade_route_map.mp4`
-12. `insert_influence_routes_map.mp4`
-13. `shot08_bormla_repair.mp4`
-14. `shot09_night_navigation.mp4`
-15. `shot10_underwater_shipwreck.mp4`
-16. `shot11_modern_conservation.mp4`
-17. `end_legacy`
+7. `shot04_quay_loading.mp4`
+8. `shot05_marketplace_exchange.mp4`
+9. `shot06_ship_construction.mp4`
+10. `shot07_trade_route_map.mp4`
+11. `insert_cultural_influence_map.mp4`
+12. `shot08_bormla_repair.mp4`
+13. `shot09_night_navigation.mp4`
+14. `shot10_underwater_shipwreck.mp4`
+15. `shot11_modern_conservation.mp4`
+16. `end_legacy`
