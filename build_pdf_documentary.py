@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import os
 import shutil
 import subprocess
 import sys
@@ -24,9 +25,9 @@ WIDTH = 1280
 HEIGHT = 720
 FPS = 24
 SAMPLE_RATE = 24000
-VOICE = "en-US-RogerNeural"
-VOICE_RATE = "-10%"
-VOICE_PITCH = "-12Hz"
+VOICE = os.environ.get("VIDEO_TTS_VOICE", "en-GB-ThomasNeural")
+VOICE_RATE = os.environ.get("VIDEO_TTS_RATE", "-8%")
+VOICE_PITCH = os.environ.get("VIDEO_TTS_PITCH", "-14Hz")
 AMBIENCE_EXTENSIONS = (".wav", ".mp3", ".m4a", ".flac", ".ogg")
 DEFAULT_AMBIENCE_VOLUME = 0.10
 MUSIC_VOLUME = 0.045

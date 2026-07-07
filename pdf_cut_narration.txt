@@ -1,14 +1,14 @@
 # Used for: the PDF-aligned documentary narration source for `build_pdf_documentary.py`.
 # Format: segment_key|voiceover text
 
-intro_ocean|In the first millennium before Christ, Phoenician sailors turned the Mediterranean into a connected world.
-shot01_trade_network_fleet|From the Levant, their fleets carried stone, pottery, timber, and ideas across open water.
-shot02_hero_gaulos_ship|The gaulos merchant ship used a deep, rounded hull built for cargo, balance, and distance.
-shot03_harbor_approach|Malta stood at the center of those routes, and Bormla offered a rare natural harbor.
-shot04_quay_loading|Here, amphorae and millstones were loaded quickly as crews prepared the next leg of the voyage.
-shot05_marketplace_exchange|Trade also meant contact, as Phoenicians and local Maltese communities exchanged goods, skills, and language.
+intro_ocean|In the first millennium BCE, Phoenician sailors turned the Mediterranean into a connected world.
+shot01_trade_network_fleet|From the Levant, their fleets carried volcanic stone millstones, diverse pottery, timber, and ideas across vast distances.
+shot02_hero_gaulos_ship|The gaulos was a sophisticated blend of Egyptian and Greek design, with a symmetrical rounded hull built for cargo volume and long trade routes.
+shot03_harbor_approach|Malta stood at the center of those routes, and Bormla offered a rare deep-water harbor in the central Mediterranean.
+shot04_quay_loading|Here, amphorae, millstones, and provisions were loaded quickly before ships sailed onward to Sardinia, North Africa, and southern Europe.
+shot05_marketplace_exchange|Trade also meant contact, as Phoenician settlers exchanged goods, skills, and language with Malta's indigenous population.
 shot06_ship_construction|These ships relied on cedar planking, mortise-and-tenon joints, and protective resins to survive the sea.
-shot07_trade_route_map|Square sails drove them onward, while Malta linked the Levant, North Africa, and southern Europe.
+shot07_trade_route_map|Their expansion also spread craftsmanship, naval technology, and the alphabet, influencing the civilizations of Sardinia and North Africa.
 shot08_bormla_repair|Bormla's limestone inlets gave shelter, repair space, fresh supplies, and direct access to deep water.
 shot09_night_navigation|At night, navigators held their course by the North Star and familiar constellations.
 shot10_underwater_shipwreck|Shipwrecks near Malta still preserve amphorae, anchors, and cargo that prove this maritime system.
