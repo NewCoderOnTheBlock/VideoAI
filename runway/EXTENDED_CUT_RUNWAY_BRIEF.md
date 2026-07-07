@@ -60,8 +60,8 @@ The old `insert_trade_goods.mp4` is not recommended as the final insert. It feel
 
 ## Workflow
 
-- First create a new still keyframe for each new insert.
-- Then upload that still to Runway and use the matching motion prompt below.
+- The still keyframes below have already been generated and saved in `runway/extended_cut_keyframes/`.
+- Upload those stills to Runway and use the matching motion prompt below.
 
 ## Runway Instructions
 
@@ -73,8 +73,8 @@ The old `insert_trade_goods.mp4` is not recommended as the final insert. It feel
 
 ## Shot 1: Trade Goods Detail Insert
 
-- Create still keyframe first:
-  - Save as `runway/extended_cut_keyframes/insert_trade_goods_detail.png`
+- Generated still keyframe:
+  - `runway/extended_cut_keyframes/insert_trade_goods_detail.png`
 - Keyframe prompt:
   - `Tight cinematic historical documentary close-up on an ancient Maltese stone quay during the Phoenician era, dock workers handling volcanic stone millstones, amphorae, and diverse decorated pottery, hands passing cargo, coarse rope, weathered wood, warm Mediterranean sunlight, realistic textures, no modern objects, no text, 16:9.`
 - Upload image:
@@ -88,8 +88,8 @@ The old `insert_trade_goods.mp4` is not recommended as the final insert. It feel
 
 ## Shot 2: Gaulos Broadside Hull Insert
 
-- Create still keyframe first:
-  - Save as `runway/extended_cut_keyframes/insert_gaulos_broadside_hull.png`
+- Generated still keyframe:
+  - `runway/extended_cut_keyframes/insert_gaulos_broadside_hull.png`
 - Keyframe prompt:
   - `Broadside documentary view of a Phoenician gaulos merchant ship at sea, clear rounded cargo belly, symmetrical hull shape, high curved bow and stern, square sail, calm Mediterranean water, golden late-afternoon light, historically grounded, realistic wood texture, no modern objects, no text, 16:9.`
 - Upload image:
@@ -103,8 +103,8 @@ The old `insert_trade_goods.mp4` is not recommended as the final insert. It feel
 
 ## Shot 3: Cultural Influence Map Insert
 
-- Create still keyframe first:
-  - Save as `runway/extended_cut_keyframes/insert_cultural_influence_map.png`
+- Generated still keyframe:
+  - `runway/extended_cut_keyframes/insert_cultural_influence_map.png`
 - Keyframe prompt:
   - `Ancient Mediterranean trade map laid on a wooden table, Malta at the center with visible links toward Sardinia, North Africa, the Levant, and southern Europe, parchment, trade tokens, pottery fragments, warm candlelight, scholarly historical documentary mood, no modern labels, no text overlay, 16:9.`
 - Upload image:
