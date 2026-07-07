@@ -5,9 +5,9 @@ Used for: the final narration, ambience, and music setup for the documentary cut
 ## Current Voice
 
 - Engine: `edge-tts`
-- Voice: `en-US-RogerNeural`
-- Rate: `-10%`
-- Pitch: `-12Hz`
+- Voice: `en-GB-SoniaNeural`
+- Rate: `-8%`
+- Pitch: `-14Hz`
 
 ## Current Music Bed
 
@@ -33,15 +33,18 @@ Shot-level ambience files are stored in:
 - `shot02_hero_gaulos_ship`
 - `shot03_harbor_approach`
 - `shot04_quay_loading`
+- `insert_trade_goods_detail`
 - `shot05_marketplace_exchange`
 - `shot06_ship_construction`
+- `insert_gaulos_broadside_hull`
+- `shot07_trade_route_map`
+- `insert_cultural_influence_map`
 - `shot08_bormla_repair`
 - `shot09_night_navigation`
 - `shot10_underwater_shipwreck`
 
 These remain narration-only unless you add new ambience files:
 
-- `shot07_trade_route_map`
 - `shot11_modern_conservation`
 - `end_legacy`
 
@@ -59,4 +62,4 @@ After rendering, check:
 
 - Replace the narration voice with a recorded voiceover
 - Replace the music bed with a different licensed track
-- Add ambience for the map, conservation, or ending shots
+- Add ambience for the conservation or ending shots

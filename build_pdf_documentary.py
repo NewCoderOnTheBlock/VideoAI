@@ -21,8 +21,13 @@ OUTPUT_DIR = Path(
 VIDEO_DIR = OUTPUT_DIR / "video_parts"
 AUDIO_DIR = OUTPUT_DIR / "audio_parts"
 MIXED_AUDIO_DIR = OUTPUT_DIR / "mixed_audio_parts"
+DEFAULT_NARRATION = (
+    ROOT / "pdf_cut_narration_extended_draft.txt"
+    if (ROOT / "pdf_cut_narration_extended_draft.txt").exists()
+    else ROOT / "pdf_cut_narration.txt"
+)
 NARRATION_FILE = Path(
-    os.environ.get("VIDEO_NARRATION_FILE", str(ROOT / "pdf_cut_narration.txt"))
+    os.environ.get("VIDEO_NARRATION_FILE", str(DEFAULT_NARRATION))
 ).resolve()
 AMBIENCE_DIR = Path(
     os.environ.get("VIDEO_AMBIENCE_DIR", str(ROOT / "audio" / "ambience"))
@@ -43,7 +48,7 @@ DEFAULT_AMBIENCE_VOLUME = 0.10
 MUSIC_VOLUME = 0.045
 
 
-SEGMENTS: list[dict[str, object]] = [
+STANDARD_SEGMENTS: list[dict[str, object]] = [
     {"key": "intro_ocean", "source": "intro_ocean.mp4", "ambience_volume": 0.10},
     {"key": "shot01_trade_network_fleet", "source": "shot01_trade_network_fleet.mp4", "ambience_volume": 0.10},
     {"key": "shot02_hero_gaulos_ship", "source": "shot02_hero_gaulos_ship.mp4", "ambience_volume": 0.09},
@@ -66,6 +71,44 @@ SEGMENTS: list[dict[str, object]] = [
         "ambience_volume": 0.0,
     },
 ]
+
+EXTENDED_SEGMENTS: list[dict[str, object]] = [
+    {"key": "intro_ocean", "source": "intro_ocean.mp4", "ambience_volume": 0.10},
+    {"key": "shot01_trade_network_fleet", "source": "shot01_trade_network_fleet.mp4", "ambience_volume": 0.10},
+    {"key": "insert_trade_goods_detail", "source": "insert_trade_goods_detail.mp4", "ambience_volume": 0.11},
+    {"key": "shot02_hero_gaulos_ship", "source": "shot02_hero_gaulos_ship.mp4", "ambience_volume": 0.09},
+    {"key": "insert_gaulos_broadside_hull", "source": "insert_gaulos_broadside_hull.mp4", "ambience_volume": 0.08},
+    {"key": "shot03_harbor_approach", "source": "shot03_harbor_approach.mp4", "ambience_volume": 0.12},
+    {"key": "shot04_quay_loading", "source": "shot04_quay_loading.mp4", "ambience_volume": 0.13},
+    {"key": "shot05_marketplace_exchange", "source": "shot05_marketplace_exchange.mp4", "ambience_volume": 0.12},
+    {"key": "shot06_ship_construction", "source": "shot06_ship_construction.mp4", "ambience_volume": 0.11},
+    {"key": "shot07_trade_route_map", "source": "shot07_trade_route_map.mp4", "ambience_volume": 0.06},
+    {"key": "insert_cultural_influence_map", "source": "insert_cultural_influence_map.mp4", "ambience_volume": 0.03},
+    {"key": "shot08_bormla_repair", "source": "shot08_bormla_repair.mp4", "ambience_volume": 0.11},
+    {"key": "shot09_night_navigation", "source": "shot09_night_navigation.mp4", "ambience_volume": 0.07},
+    {"key": "shot10_underwater_shipwreck", "source": "shot10_underwater_shipwreck.mp4", "ambience_volume": 0.05},
+    {"key": "shot11_modern_conservation", "source": "shot11_modern_conservation.mp4", "ambience_volume": 0.04},
+    {
+        "key": "end_legacy",
+        "source": None,
+        "duration": 4.0,
+        "card_text": "The Phoenician Legacy Lives On",
+        "card_subtitle": "Bormla still stands at the heart of Maltese maritime memory.",
+        "background_from": "shot11_modern_conservation.mp4",
+        "ambience_volume": 0.0,
+    },
+]
+
+
+def select_segments(narration_path: Path) -> list[dict[str, object]]:
+    cut_mode = os.environ.get("VIDEO_CUT_MODE", "").strip().lower()
+    if cut_mode == "standard":
+        return STANDARD_SEGMENTS
+    if cut_mode == "extended":
+        return EXTENDED_SEGMENTS
+    if "extended" in narration_path.stem:
+        return EXTENDED_SEGMENTS
+    return STANDARD_SEGMENTS
 
 
 def load_narration(path: Path) -> dict[str, str]:
@@ -469,6 +512,7 @@ def main() -> None:
 
     font = find_font()
     narration = load_narration(NARRATION_FILE)
+    segments = select_segments(NARRATION_FILE)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     VIDEO_DIR.mkdir(parents=True, exist_ok=True)
@@ -483,7 +527,7 @@ def main() -> None:
     ambience_report: list[str] = []
     elapsed = 0.0
 
-    for index, segment in enumerate(SEGMENTS, start=1):
+    for index, segment in enumerate(segments, start=1):
         key = str(segment["key"])
         text = narration.get(key)
         if not text:

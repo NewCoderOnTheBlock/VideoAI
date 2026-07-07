@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -8,9 +9,15 @@ from render_support import find_ffmpeg, run
 
 
 ROOT = Path(__file__).resolve().parent
-SOURCE_DIR = ROOT / "audio" / "mixkit_sources"
-OUTPUT_DIR = ROOT / "audio" / "ambience"
-SELECTED_DIR = ROOT / "pika" / "finals" / "selected"
+SOURCE_DIR = Path(
+    os.environ.get("VIDEO_MIXKIT_SOURCE_DIR", str(ROOT / "audio" / "mixkit_sources"))
+).resolve()
+OUTPUT_DIR = Path(
+    os.environ.get("VIDEO_AMBIENCE_DIR", str(ROOT / "audio" / "ambience"))
+).resolve()
+SELECTED_DIR = Path(
+    os.environ.get("VIDEO_SELECTED_DIR", str(ROOT / "pika" / "finals" / "selected"))
+).resolve()
 
 
 SOURCES = {
@@ -40,11 +47,23 @@ RECIPES: dict[str, dict[str, object]] = {
     "shot04_quay_loading": {
         "inputs": [("harbor_rocks", 0.14), ("hammer_wood", 0.05)],
     },
+    "insert_trade_goods_detail": {
+        "inputs": [("harbor_rocks", 0.14), ("sea_waves_birds", 0.05)],
+    },
     "shot05_marketplace_exchange": {
         "inputs": [("harbor_rocks", 0.12), ("sea_waves_birds", 0.05)],
     },
     "shot06_ship_construction": {
         "inputs": [("hammer_wood", 0.10), ("saw_wood", 0.07)],
+    },
+    "insert_gaulos_broadside_hull": {
+        "inputs": [("close_sea_waves", 0.20), ("windy_sea", 0.08)],
+    },
+    "shot07_trade_route_map": {
+        "inputs": [("windy_sea", 0.06), ("close_sea_waves", 0.04)],
+    },
+    "insert_cultural_influence_map": {
+        "inputs": [("windy_sea", 0.05)],
     },
     "shot08_bormla_repair": {
         "inputs": [("harbor_rocks", 0.10), ("hammer_wood", 0.07)],
