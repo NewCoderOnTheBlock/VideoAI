@@ -1,0 +1,19 @@
+# Used for: version 2 narration with cleaner subtitles and a stronger close while staying aligned to the PDF.
+# Format: segment_key|voiceover text
+
+intro_ocean|In the first millennium BCE, Phoenician sailors turned the Mediterranean into a connected world.
+shot01_trade_network_fleet|From the Levant, their fleets crossed open water carrying timber, resins, and fine goods.
+insert_trade_goods_detail|They also moved volcanic stone millstones, amphorae, and diverse pottery across vast distances.
+shot02_hero_gaulos_ship|The gaulos was a sophisticated blend of Egyptian and Greek design.
+insert_gaulos_broadside_hull|Its rounded hull maximized cargo volume while preserving balance and endurance at sea.
+shot03_harbor_approach|Malta stood at the center of these maritime routes.
+shot04_quay_loading|Here, cargo and provisions were loaded before ships sailed to Sardinia, North Africa, and southern Europe.
+shot05_marketplace_exchange|Trade also meant contact, as Phoenician settlers exchanged goods, skills, and language with Malta's indigenous population.
+shot06_ship_construction|These ships used cedar planking, mortise-and-tenon joints, and protective sealants to survive the sea.
+shot07_trade_route_map|Malta linked the Levant to Sardinia, North Africa, and southern Europe.
+insert_cultural_influence_map|Phoenician expansion also spread craftsmanship, naval technology, and the alphabet.
+shot08_bormla_repair|Bormla's limestone inlets gave shelter, repair space, fresh water, and direct access to deep harbor routes.
+shot09_night_navigation|At night, navigators held their course by the North Star, constellations, square sails, and stern steering oars.
+shot10_underwater_shipwreck|Shipwrecks near Malta still preserve amphorae, anchors, and cargo that prove this maritime system.
+shot11_modern_conservation|Today, conservation and digital recording protect that evidence and keep Bormla's maritime memory alive.
+end_legacy|Across the Grand Harbour and the Three Cities, that Phoenician legacy still shapes Malta's story at sea.
