@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import os
+import time
 import shutil
 import subprocess
 import sys
@@ -74,6 +75,9 @@ SAMPLE_RATE = 24000
 VOICE = os.environ.get("VIDEO_TTS_VOICE", "en-GB-SoniaNeural")
 VOICE_RATE = os.environ.get("VIDEO_TTS_RATE", "-8%")
 VOICE_PITCH = os.environ.get("VIDEO_TTS_PITCH", "-14Hz")
+ALLOW_TTS_FALLBACK = os.environ.get("VIDEO_ALLOW_TTS_FALLBACK", "").strip().lower() in {"1", "true", "yes"}
+NARRATION_LEAD_PAD = float(os.environ.get("VIDEO_NARRATION_LEAD_PAD", "0.45"))
+NARRATION_TAIL_PAD = float(os.environ.get("VIDEO_NARRATION_TAIL_PAD", "0.55"))
 AMBIENCE_EXTENSIONS = (".wav", ".mp3", ".m4a", ".flac", ".ogg")
 DEFAULT_AMBIENCE_VOLUME = 0.10
 MUSIC_VOLUME = 0.045
@@ -248,6 +252,24 @@ def extract_end_card_background(ffmpeg: str, source_clip: Path, output_image: Pa
     run(cmd)
 
 
+def extend_video_to_duration(ffmpeg: str, source: Path, output: Path, duration: float) -> None:
+    cmd = [
+        ffmpeg,
+        "-y",
+        "-i",
+        str(source),
+        "-vf",
+        f"tpad=stop_mode=clone:stop_duration={duration:.2f}",
+        "-an",
+        "-c:v",
+        "libx264",
+        "-pix_fmt",
+        "yuv420p",
+        str(output),
+    ]
+    run(cmd)
+
+
 def build_end_card(
     ffmpeg: str,
     font: Path,
@@ -373,27 +395,33 @@ def synthesize_segment(ffmpeg: str, text: str, base_output: Path) -> Path:
     mp3_output = base_output.with_suffix(".mp3")
     wav_output = base_output.with_suffix(".wav")
 
-    try:
-        asyncio.run(synthesize_with_edge_tts(text, mp3_output))
-        return mp3_output
-    except Exception:
-        if mp3_output.exists():
-            mp3_output.unlink()
+    edge_error: Exception | None = None
+    for attempt in range(3):
+        try:
+            asyncio.run(synthesize_with_edge_tts(text, mp3_output))
+            return mp3_output
+        except Exception as exc:
+            edge_error = exc
+            if mp3_output.exists():
+                mp3_output.unlink()
+            if attempt < 2:
+                time.sleep(1.0 + attempt)
 
-    if sys.platform.startswith("win"):
+    if ALLOW_TTS_FALLBACK and sys.platform.startswith("win"):
         synthesize_with_windows_sapi(text, wav_output)
         return wav_output
 
-    synthesize_with_flite(ffmpeg, text, wav_output)
-    return wav_output
+    if ALLOW_TTS_FALLBACK:
+        synthesize_with_flite(ffmpeg, text, wav_output)
+        return wav_output
+
+    raise RuntimeError(
+        f"edge-tts failed for voice '{VOICE}' and fallback is disabled"
+    ) from edge_error
 
 
 def fit_audio_to_duration(ffmpeg: str, ffprobe: str, source: Path, output: Path, duration: float) -> None:
-    source_duration = probe_duration(ffprobe, source)
     filters: list[str] = []
-    if source_duration > duration:
-        tempo = source_duration / duration
-        filters.append(f"atempo={tempo:.5f}")
     filters.append(f"apad=pad_dur={duration + 0.5:.2f}")
     filters.append(f"atrim=0:{duration:.2f}")
     cmd = [
@@ -606,6 +634,9 @@ def main() -> None:
             raise KeyError(f"Missing narration for segment '{key}' in {NARRATION_FILE}")
 
         video_output = VIDEO_DIR / f"{index:02d}_{key}.mp4"
+        raw_audio = synthesize_segment(ffmpeg, text, AUDIO_DIR / f"{index:02d}_{key}_raw")
+        raw_audio_duration = probe_duration(ffprobe, raw_audio)
+        required_duration = raw_audio_duration + NARRATION_LEAD_PAD + NARRATION_TAIL_PAD
         source_name = segment.get("source")
         if source_name:
             source = SELECTED_DIR / str(source_name)
@@ -613,8 +644,13 @@ def main() -> None:
                 raise FileNotFoundError(f"Missing selected clip: {source}")
             normalize_clip(ffmpeg, source, video_output, crop_watermark=use_watermark_crop)
             duration = probe_duration(ffprobe, video_output)
+            if required_duration > duration:
+                extended_output = VIDEO_DIR / f"{index:02d}_{key}_extended.mp4"
+                extend_video_to_duration(ffmpeg, video_output, extended_output, required_duration - duration)
+                video_output = extended_output
+                duration = probe_duration(ffprobe, video_output)
         else:
-            duration = float(segment["duration"])
+            duration = max(float(segment["duration"]), required_duration)
             background_image: Path | None = None
             background_source = segment.get("background_from")
             if background_source:
@@ -630,8 +666,6 @@ def main() -> None:
                 str(segment["card_subtitle"]),
                 background_image,
             )
-
-        raw_audio = synthesize_segment(ffmpeg, text, AUDIO_DIR / f"{index:02d}_{key}_raw")
         fitted_narration = AUDIO_DIR / f"{index:02d}_{key}_narration.wav"
         fit_audio_to_duration(ffmpeg, ffprobe, raw_audio, fitted_narration, duration)
 
