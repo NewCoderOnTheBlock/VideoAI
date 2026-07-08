@@ -1,0 +1,19 @@
+# Used for: the longer no-compression narration draft that matches the planned extended cut with new Runway inserts.
+# Format: segment_key|voiceover text
+
+intro_ocean|In the first millennium BCE, Phoenician sailors turned the Mediterranean into a connected world.
+shot01_trade_network_fleet|From the Levant, their fleets crossed open water carrying timber, resins, and ideas.
+insert_trade_goods_detail|They also moved volcanic stone millstones, amphorae, and diverse pottery across vast distances.
+shot02_hero_gaulos_ship|The gaulos was a sophisticated blend of Egyptian and Greek design.
+insert_gaulos_broadside_hull|Its symmetrical rounded hull favored internal cargo volume, balance, and endurance at sea.
+shot03_harbor_approach|Malta stood at the center of these maritime routes.
+shot04_quay_loading|Here, provisions and cargo were loaded before ships sailed onward to Sardinia, North Africa, and southern Europe.
+shot05_marketplace_exchange|Trade also meant contact, as Phoenician settlers exchanged goods, skills, and language with Malta's indigenous population.
+shot06_ship_construction|These ships relied on cedar planking, mortise-and-tenon joints, and protective resins to survive the sea.
+shot07_trade_route_map|Malta linked the Levant to Sardinia, North Africa, and southern Europe.
+insert_cultural_influence_map|Phoenician expansion also spread craftsmanship, naval technology, and the alphabet.
+shot08_bormla_repair|Bormla's limestone inlets gave shelter, repair space, fresh supplies, and direct access to deep water.
+shot09_night_navigation|At night, navigators held their course by the North Star and familiar constellations.
+shot10_underwater_shipwreck|Shipwrecks near Malta still preserve amphorae, anchors, and cargo that prove this maritime system.
+shot11_modern_conservation|Today, conservation and digital recording protect that evidence and keep Bormla's maritime memory alive.
+end_legacy|That legacy still shapes the Three Cities today.
